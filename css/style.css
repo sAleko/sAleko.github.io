@@ -330,7 +330,20 @@
 }.case-details-info h5{margin:0 0 10px 0;font-size:20px;color:#fff;font-family:"Yeseva One",cursive}
 .case-details-info p{margin:0}.case-details-service{margin-bottom:90px}.case-details-service h3{font-family:"Yeseva One",cursive;color:#282f49;font-size:25px;margin:0 0 25px 0}
 .case-details-service p{margin:0}.case-details-thumb{margin:0 0 90px 0;border-radius:30px;overflow:hidden}
-.case-details-thumb img{height:100%;width:100%}.case-details-nav{display:flex;justify-content:space-between;align-items:center;margin-top:50px}
+.case-details-thumb img{height:100%;width:100%}.case-details-button ul{margin:0;padding:0}
+.case-details-button ul li{list-style:none;display:inline-block}.case-details-button ul li a{display:block;padding:15px 30px;text-decoration:none;color:#282f49;border-radius:7px;transition:all .3s ease;border:1px solid #60636f;background:transparent}
+.case-details-button ul li a.active{background-color:#1e9123;border:1px solid transparent}
+.case-details-button ul li a:hover{border:1px solid #25ad2c;background:#25ad2c;box-shadow:0 8px 20px rgba(56,87,241,0.3);transform:scale(1.03)}
+.case-details-button ul li:not(:last-child){margin-right:10px}@media(max-width:375px){.case-details-button ul li:not(:last-child){margin-bottom:10px}
+}.case-details-popup{position:absolute;bottom:-280px;left:50%;transform:translateX(-50%);transition:all .3s ease}
+@media(max-width:991px){.case-details-popup{bottom:-40px;left:50%;transform:translateX(-50%)}
+}.case-details-popup .thumb{height:320px;width:500px;border:1px solid #707070;border-radius:20px;overflow:hidden;position:relative}
+.case-details-popup .thumb::before{position:absolute;content:"";top:0;left:0;height:100%;width:100%;background:rgba(0,0,0,0.6);z-index:1}
+.case-details-popup .thumb img{width:100%;height:100%;-o-object-fit:cover;object-fit:cover}.case-details-popup .popup-button{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);height:60px;width:60px;background:#fff;border-radius:50%;z-index:2;transition:all .3s ease}
+.case-details-popup .popup-button svg{position:absolute;top:50%;left:55%;transform:translate(-50%,-50%);transition:all .3s ease}
+.case-details-popup .popup-button:hover{background-color:#1e9123}.case-details-popup .popup-button:hover svg path{fill:#fff}
+.case-details-popup:hover .popup-button{transform:translate(-50%,-50%) scale(1.1)}
+.case-details-nav{display:flex;justify-content:space-between;align-items:center;margin-top:50px}
 .case-details-nav .previous .icon,.case-details-nav .next .icon{line-height:0}.case-details-nav .previous .content span,.case-details-nav .next .content span{display:block;font-family:"Poppins",sans-serif;color:#7e7e8a;font-size:15px;line-height:1;margin-bottom:5px}
 .case-details-nav .previous .content h5,.case-details-nav .next .content h5{font-family:"Yeseva One",cursive;font-size:20px;margin:0;line-height:1}
 .case-details-nav .previous .content h5 a,.case-details-nav .next .content h5 a{text-decoration:none;color:#282f49;transition:all .3s ease}
