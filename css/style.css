@@ -330,7 +330,8 @@
 }.case-details-info h5{margin:0 0 10px 0;font-size:20px;color:#fff;font-family:"Yeseva One",cursive}
 .case-details-info p{margin:0}.case-details-service{margin-bottom:90px}.case-details-service h3{font-family:"Yeseva One",cursive;color:#282f49;font-size:25px;margin:0 0 25px 0}
 .case-details-service p{margin:0}.case-details-thumb{margin:0 0 90px 0;border-radius:30px;overflow:hidden}
-.case-details-thumb img{height:100%;width:100%}.case-details-button ul{margin:0;padding:0}
+.case-details-thumb img{height:100%;width:100%}.case-details-row{display:flex;justify-content:center;gap:1rem;margin:0 0 90px 0}
+.case-details-row img{max-width:100%;height:auto;width:45%;-o-object-fit:cover;object-fit:cover}.case-details-button ul{margin:0;padding:0}
 .case-details-button ul li{list-style:none;display:inline-block}.case-details-button ul li a{display:block;padding:15px 30px;text-decoration:none;color:#282f49;border-radius:7px;transition:all .3s ease;border:1px solid #60636f;background:transparent}
 .case-details-button ul li a.active{background-color:#1e9123;border:1px solid transparent}
 .case-details-button ul li a:hover{border:1px solid #25ad2c;background:#25ad2c;box-shadow:0 8px 20px rgba(56,87,241,0.3);transform:scale(1.03)}
