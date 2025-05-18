@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Final Project Testing</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+    <div id="tooltip" style="display:none"></div> 
+
+    <div class="container"> <!-- Centers content and sets max width -->
+        <h1>Final Project Testing</h1>
+        
+        <div id="loadingGif">
+            Loading data...
+            <img src="https://media.tenor.com/WX_LDjYUrMsAAAAi/loading.gif" alt="Loading" style="width:48px;height:48px;">
+        </div>
+
+        <div id="controls">
+            <div class="selectionGroups">
+                <h4>Years:</h4>
+                Start Year:         <select id="startYearVar" class="variable"></select>&emsp;
+                End Year:           <select id="endYearVar" class="variable"></select>
+            </div>
+            <br>
+            <div class="selectionGroups" style="float: left;">
+                <h4>Group 1:</h4>
+                Age Range:          &emsp;<select id="g1AgeVar" class="variable"></select><br>
+                Sex:                &emsp;<select id="g1SexVar" class="variable"></select><br>
+                Ethnicity:          &emsp;<select id="g1EthnicityVar" class="variable"></select><br>
+                Bodily Health:      &emsp;<select id="g1HealthVar" class="variable"></select><br>
+                Income Range:       &emsp;<select id="g1IncomeVar" class="variable"></select><br>
+                Health Insurance:   &emsp;<select id="g1InsuredVar" class="variable"></select><br>
+                Military Service:   &emsp;<select id="g1ServedVar" class="variable"></select><br>
+                Color of Circle:    &emsp;<input type="color" id="g1Color" value="#8EB1C7"><br>
+            </div>
+            <div class="selectionGroups" style="float: right;">
+                <h4>Group 2:</h4>
+                Age Range:          &emsp;<select id="g2AgeVar" class="variable"></select><br>
+                Sex:                &emsp;<select id="g2SexVar" class="variable"></select><br>
+                Ethnicity:          &emsp;<select id="g2EthnicityVar" class="variable"></select><br>
+                Bodily Health:      &emsp;<select id="g2HealthVar" class="variable"></select><br>
+                Income Range:       &emsp;<select id="g2IncomeVar" class="variable"></select><br>
+                Health Insurance:   &emsp;<select id="g2InsuredVar" class="variable"></select><br>
+                Military Service:   &emsp;<select id="g2ServedVar" class="variable"></select><br>
+                Color of Circle:    &emsp;<input type="color" id="g2Color" value="#F9DC5C"><br>
+            </div>
+            
+        </div>
+        
+        <!-- <div>
+            <input name="updateButton"
+                type="Button"
+                value="Update"
+                onclick="updateVis()" />
+        </div> -->
+        <div id="vis"></div> <!--  Will hold our visualization (SVG) -->
+    </div>
+    
+
+    <!-- Load D3.js -->
+    <script src="https://d3js.org/d3.v7.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
