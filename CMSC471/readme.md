@@ -73,3 +73,5 @@ Yuji
 
 Luul
 - Overview, What it is, and Data section of writeup
+- Made the charts on  both sides 
+- Made the charts both sides move 
