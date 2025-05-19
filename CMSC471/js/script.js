@@ -4,7 +4,7 @@ console.log('D3 Version:', d3.version);
 // Set up SVG dimensions
 const width = 1000;
 const height = 500;
-const xMax = 100, curveMargin = {x: 0.25 * width, y: 0.2 * height};
+const xMax = 100, curveMargin = {x: 0.3 * width, y: 0.2 * height};
 const randRange = xMax / 3;
 const circleRadius = 5, numCircles = 200;
 const startLowPerc = 0.2, endLowPerc = 0.3;
@@ -51,6 +51,11 @@ let counts = {
     g1NotDepressed: 0,
     g2Depressed: 0,
     g2NotDepressed: 0
+};
+
+let totalPopAfter = {
+    g1: 0,
+    g2: 0
 };
 
 // Append an SVG element to the body
@@ -152,9 +157,17 @@ function updateVis() {
     loadCircles();
 }
 
-function weighted_depression_tab(l) {
+function weighted_depression_tab(l, group) {
     const total_wt = l.reduce((acc, v) => acc + parseFloat(v.weight), 0);
     const dep_wt = l.reduce((acc, v) => v.isDepressed == 1 ? acc + parseFloat(v.weight) : acc, 0);
+    if (group != null) {
+        if (group == totalPopAfter.g1) {
+            totalPopAfter.g1 = total_wt;
+        } else {
+            totalPopAfter.g2 = total_wt;
+        }
+    }
+    // console.log(`Weights: Total: ${total_wt}, Depp: ${dep_wt}`)
     return dep_wt / total_wt;
 }
 
@@ -190,10 +203,10 @@ function filter() {
     group2after = group2.filter(d => d.year == dropdownValue('endYear'));
 
     depressionRates = {
-        'g1before': weighted_depression_tab(group1before),
-        'g1after': weighted_depression_tab(group1after),
-        'g2before': weighted_depression_tab(group2before),
-        'g2after': weighted_depression_tab(group2after),
+        'g1before': weighted_depression_tab(group1before, null),
+        'g1after': weighted_depression_tab(group1after, totalPopAfter.g1),
+        'g2before': weighted_depression_tab(group2before, null),
+        'g2after': weighted_depression_tab(group2after, totalPopAfter.g2),
     };
 
     console.log("Depression rates: ", depressionRates);
@@ -209,7 +222,7 @@ function generateBezierPath(p1, p2) {
 }
 
 function addLabels() {
-    const x = d3.scaleLinear().domain([0, xMax]).range([curveMargin.x, width - curveMargin.x]);
+    const x = d3.scaleLinear().domain([0, xMax]).range([curveMargin.x / 2, width - curveMargin.x]);
     const y = d3.scaleLinear().domain([0, xMax]).range([curveMargin.y, height - curveMargin.y]);
 
     const bigTextSize = width * 0.03;
@@ -219,7 +232,7 @@ function addLabels() {
     const endYear = d3.select('#endYearVar').node().value;
 
     svg.append('text')
-        .attr('x', curveMargin.x * 0.9)
+        .attr('x', curveMargin.x * 0.9 / 2)
         .attr('y', height * 0.95)
         .attr('text-anchor', 'end')
         .attr('font-family', 'Arial, sans-serif')
@@ -309,7 +322,7 @@ function addLabels() {
 
     // Group 2 Labels
     svg.append('text')
-        .attr('x', width - curveMargin.x * 0.5)
+        .attr('x', width - curveMargin.x * 0.45)
         .attr('y', curveMargin.y * 0.7)
         .attr('text-anchor', 'start')
         .attr('font-family', 'Arial, sans-serif')
@@ -319,7 +332,7 @@ function addLabels() {
 
     svg.append('text')
         .attr('id', 'g2DepressedCount')
-        .attr('x', width - curveMargin.x * 0.5)
+        .attr('x', width - curveMargin.x * 0.45)
         .attr('y', curveMargin.y)
         .attr('text-anchor', 'start')
         .attr('font-family', 'Arial, sans-serif')
@@ -329,7 +342,7 @@ function addLabels() {
     
     svg.append('rect')
         .attr('id', 'g2D')
-        .attr('x', width - curveMargin.x * 0.5)
+        .attr('x', width - curveMargin.x * 0.45)
         .attr('y', curveMargin.y + 5)
         .attr('width', 70)
         .attr('height', 0)
@@ -337,7 +350,7 @@ function addLabels() {
 
     svg.append('text')
         .attr('id', 'g2NotDepressedCount')
-        .attr('x', width - curveMargin.x * 0.5)
+        .attr('x', width - curveMargin.x * 0.45)
         .attr('y', height - curveMargin.y)
         .attr('text-anchor', 'start')
         .attr('font-family', 'Arial, sans-serif')
@@ -347,7 +360,7 @@ function addLabels() {
     
       svg.append('rect')
         .attr('id', 'g2ND')
-        .attr('x', width - curveMargin.x * 0.5)
+        .attr('x', width - curveMargin.x * 0.45)
         .attr('y', curveMargin.y+270)
         .attr('width', 70)
         .attr('height', 0)
@@ -357,7 +370,7 @@ function addLabels() {
 }
 
 function loadCircles() {
-    const x = d3.scaleLinear().domain([0, xMax]).range([curveMargin.x, width - curveMargin.x]);
+    const x = d3.scaleLinear().domain([0, xMax]).range([curveMargin.x / 2, width - curveMargin.x]);
     const y = d3.scaleLinear().domain([0, xMax]).range([curveMargin.y, height - curveMargin.y]);
     const yThreshold = y(xMax / 2);
 
@@ -464,24 +477,24 @@ function loadCircles() {
 
         function updateCounts() {
             if (group === 1) {
-                if (isDepressedEnd) counts.g1Depressed++;
-                else counts.g1NotDepressed++;
+                if (isDepressedEnd) counts.g1Depressed += totalPopAfter.g1 / numCircles / 2;
+                else counts.g1NotDepressed += totalPopAfter.g1 / numCircles / 2;
             } else {
-                if (isDepressedEnd) counts.g2Depressed++;
-                else counts.g2NotDepressed++;
+                if (isDepressedEnd) counts.g2Depressed += totalPopAfter.g2 / numCircles / 2;
+                else counts.g2NotDepressed += totalPopAfter.g2 / numCircles / 2;
             }
 
             let g1Total = counts.g1Depressed + counts.g1NotDepressed;
-            let g2Total = counts.g1Depressed + counts.g1NotDepressed;
+            let g2Total = counts.g2Depressed + counts.g2NotDepressed;
 
             d3.select('#g1DepressedCount')
-                .text(`${counts.g1Depressed} \t(${((counts.g1Depressed / (g1Total != 0 ? g1Total : 1)) * 100).toFixed(1)}%)`);
+                .text(`${(counts.g1Depressed/1000000).toFixed(1)}M \t(${((counts.g1Depressed / (g1Total != 0 ? g1Total : 1)) * 100).toFixed(1)}%)`);
             d3.select('#g1NotDepressedCount')
-                .text(`${counts.g1NotDepressed} (${((counts.g1NotDepressed / (g1Total != 0 ? g1Total : 1)) * 100).toFixed(1)}%)`);
+                .text(`${(counts.g1NotDepressed/1000000).toFixed(1)}M (${((counts.g1NotDepressed / (g1Total != 0 ? g1Total : 1)) * 100).toFixed(1)}%)`);
             d3.select('#g2DepressedCount')
-                .text(`${counts.g2Depressed} (${((counts.g2Depressed / (g2Total != 0 ? g2Total : 1)) * 100).toFixed(1)}%)`);
+                .text(`${(counts.g2Depressed/1000000).toFixed(1)}M (${((counts.g2Depressed / (g2Total != 0 ? g2Total : 1)) * 100).toFixed(1)}%)`);
             d3.select('#g2NotDepressedCount')
-                .text(`${counts.g2NotDepressed} (${((counts.g2NotDepressed / (g2Total != 0 ? g2Total : 1)) * 100).toFixed(1)}%)`);
+                .text(`${(counts.g2NotDepressed/1000000).toFixed(1)}M (${((counts.g2NotDepressed / (g2Total != 0 ? g2Total : 1)) * 100).toFixed(1)}%)`);
 
             //This is for the bar graphs that grow upward
              const maxBarHeight = 100;
