@@ -8,7 +8,7 @@ const xMax = 100, curveMargin = {x: 0.25 * width, y: 0.2 * height};
 const randRange = xMax / 3;
 const circleRadius = 5, numCircles = 200;
 const startLowPerc = 0.2, endLowPerc = 0.3;
-const animationDuration = 10, randDelayDuration = 20;
+let animationDuration = 10, randDelayDuration = 20;
 const optionToField = {
     startYear: 'year',
     endYear: 'year',
@@ -139,6 +139,7 @@ function setupSelectors() {
 
 function updateVis() {
     filter();
+    svg.selectAll('circle').interrupt();
     svg.selectAll('circle').remove();
     svg.selectAll('path').remove();
     svg.selectAll('text').remove();
@@ -279,6 +280,14 @@ function addLabels() {
         .attr('font-size', `${smallTextSize}px`)
         .attr('fill', groupColors[1])
         .text('0 (0%)');
+    
+    svg.append('rect')
+        .attr('id', 'g1D')
+        .attr('x', width - curveMargin.x * 0.9)
+        .attr('y', curveMargin.y + 5)
+        .attr('width', 70)
+        .attr('height', 0)
+        .attr('fill', groupColors[1]);
 
     svg.append('text')
         .attr('id', 'g1NotDepressedCount')
@@ -289,6 +298,14 @@ function addLabels() {
         .attr('font-size', `${smallTextSize}px`)
         .attr('fill', groupColors[1])
         .text('0 (0%)');
+  
+    svg.append('rect')
+        .attr('id', 'g1ND')
+        .attr('x', width - curveMargin.x * 0.9)
+        .attr('y', curveMargin.y+270)
+        .attr('width', 70)
+        .attr('height', 0)
+        .attr('fill',  groupColors[1]);
 
     // Group 2 Labels
     svg.append('text')
@@ -309,6 +326,14 @@ function addLabels() {
         .attr('font-size', `${smallTextSize}px`)
         .attr('fill', groupColors[2])
         .text('0 (0%)');
+    
+    svg.append('rect')
+        .attr('id', 'g2D')
+        .attr('x', width - curveMargin.x * 0.5)
+        .attr('y', curveMargin.y + 5)
+        .attr('width', 70)
+        .attr('height', 0)
+        .attr('fill', groupColors[2]);
 
     svg.append('text')
         .attr('id', 'g2NotDepressedCount')
@@ -319,6 +344,16 @@ function addLabels() {
         .attr('font-size', `${smallTextSize}px`)
         .attr('fill', groupColors[2])
         .text('0 (0%)');
+    
+      svg.append('rect')
+        .attr('id', 'g2ND')
+        .attr('x', width - curveMargin.x * 0.5)
+        .attr('y', curveMargin.y+270)
+        .attr('width', 70)
+        .attr('height', 0)
+        .attr('fill', groupColors[2]);
+
+  
 }
 
 function loadCircles() {
@@ -330,15 +365,18 @@ function loadCircles() {
     const totalCirclesPerGroup = numCircles / groupCount;
     
     const groupCircleNums = {
-        'g1beforeAffected': Math.ceil(depressionRates['g1before'] * totalCirclesPerGroup),
-        'g1beforeUnAffected': Math.ceil((1 - depressionRates['g1before']) * totalCirclesPerGroup),
-        'g1afterAffected': Math.ceil(depressionRates['g1after'] * totalCirclesPerGroup),
-        'g1afterUnAffected': Math.ceil((1 - depressionRates['g1after']) * totalCirclesPerGroup),
-        'g2beforeAffected': Math.ceil(depressionRates['g2before'] * totalCirclesPerGroup),
-        'g2beforeUnAffected': Math.ceil((1 - depressionRates['g2before']) * totalCirclesPerGroup),
-        'g2afterAffected': Math.ceil(depressionRates['g2after'] * totalCirclesPerGroup),
-        'g2afterUnAffected': Math.ceil((1 - depressionRates['g2after']) * totalCirclesPerGroup),
+        'g1beforeAffected': Math.round(depressionRates['g1before'] * totalCirclesPerGroup),
+        'g1beforeUnAffected': Math.round((1 - depressionRates['g1before']) * totalCirclesPerGroup),
+        'g1afterAffected': Math.round(depressionRates['g1after'] * totalCirclesPerGroup),
+        'g1afterUnAffected': Math.round((1 - depressionRates['g1after']) * totalCirclesPerGroup),
+        'g2beforeAffected': Math.round(depressionRates['g2before'] * totalCirclesPerGroup),
+        'g2beforeUnAffected': Math.round((1 - depressionRates['g2before']) * totalCirclesPerGroup),
+        'g2afterAffected': Math.round(depressionRates['g2after'] * totalCirclesPerGroup),
+        'g2afterUnAffected': Math.round((1 - depressionRates['g2after']) * totalCirclesPerGroup),
     };
+
+    // animationDuration = 1
+    // randDelayDuration = 1
 
     for (let i = 0; i < numCircles; i++) {
         let groupStartPct;
@@ -366,6 +404,12 @@ function loadCircles() {
         */
 
         let startAffected = Math.random() < groupStartPct;
+        if (groupCircleNums[`g${group}beforeAffected`] == 0) {
+            startAffected = false
+        } else if (groupCircleNums[`g${group}beforeUnAffected`] == 0) {
+            startAffected = true
+        }
+
         if (startAffected) {
             groupCircleNums[`g${group}beforeAffected`]--;
         } else {
@@ -381,6 +425,13 @@ function loadCircles() {
 
         
         let endAffected = Math.random() < groupEndPct;
+        if (groupCircleNums[`g${group}afterAffected`] == 0) {
+            endAffected = false
+        } else if (groupCircleNums[`g${group}afterUnAffected`] == 0) {
+            endAffected = true
+        }
+
+
         if (endAffected) {
             groupCircleNums[`g${group}afterAffected`]--;
         } else {
@@ -431,6 +482,50 @@ function loadCircles() {
                 .text(`${counts.g2Depressed} (${((counts.g2Depressed / (g2Total != 0 ? g2Total : 1)) * 100).toFixed(1)}%)`);
             d3.select('#g2NotDepressedCount')
                 .text(`${counts.g2NotDepressed} (${((counts.g2NotDepressed / (g2Total != 0 ? g2Total : 1)) * 100).toFixed(1)}%)`);
+
+            //This is for the bar graphs that grow upward
+             const maxBarHeight = 100;
+
+            // Safe totals to avoid divide by zero
+            const g1TotalSafe = g1Total !== 0 ? g1Total : 1;
+            const g2TotalSafe = g2Total !== 0 ? g2Total : 1;
+
+            // Calculate heights scaled by percentage of total
+            const g1DHeight = (counts.g1Depressed / g1TotalSafe) * maxBarHeight;
+            const g1NDHeight = (counts.g1NotDepressed / g1TotalSafe) * maxBarHeight;
+            const g2DHeight = (counts.g2Depressed / g2TotalSafe) * maxBarHeight;
+            const g2NDHeight = (counts.g2NotDepressed / g2TotalSafe) * maxBarHeight;
+
+            // Baseline Y positions for bars
+            const g1DBaseY = curveMargin.y + 5;      // Depressed bars grow downward from here (y fixed)
+            const g1NDBaseY = curveMargin.y + 270;   // Not depressed bars grow upward (y moves up)
+            const g2DBaseY = curveMargin.y + 5;
+            const g2NDBaseY = curveMargin.y + 270;
+
+
+            // Normal Graphs just grow positively 
+            d3.select('#g1D')
+            .transition()
+            .duration(500)
+            .attr('y', g1DBaseY)
+            .attr('height', g1DHeight);
+            d3.select('#g2D')
+            .transition()
+            .duration(500)
+            .attr('y', g2DBaseY)
+            .attr('height', g2DHeight);
+            // Animate not depressed bars (grow upward with y moving up as height increases)
+            d3.select('#g1ND')
+            .transition()
+            .duration(500)
+            .attr('y', g1NDBaseY - g1NDHeight)
+            .attr('height', g1NDHeight);
+            d3.select('#g2ND')
+            .transition()
+            .duration(500)
+            .attr('y', g2NDBaseY - g2NDHeight)
+            .attr('height', g2NDHeight);
+           
         }
 
         function animate() {
@@ -453,6 +548,7 @@ function loadCircles() {
         animate();
     }
 
+    console.log(groupCircleNums)
     
     addLabels();
 
