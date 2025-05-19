@@ -46,6 +46,13 @@ let depressionRates = {
     'g2after': 0.0,
 };
 
+let nValues = {
+    'g1before': 0,
+    'g1after': 0,
+    'g2before': 0,
+    'g2after': 0,
+}
+
 let counts = {
     g1Depressed: 0,
     g1NotDepressed: 0,
@@ -208,6 +215,13 @@ function filter() {
         'g2after': weighted_depression_tab(group2after),
     };
 
+    nValues = {
+        'g1before': group1before.length,
+        'g1after': group1after.length,
+        'g2before': group2before.length,
+        'g2after': group2after.length
+    }
+
     totalPop = {
         'g1before': group_wt(group1before),
         'g1after': group_wt(group1after),
@@ -237,6 +251,52 @@ function addLabels() {
 
     const startYear = d3.select('#startYearVar').node().value;
     const endYear = d3.select('#endYearVar').node().value;
+
+    nLabels()
+
+    function nLabels() {
+        const tinyTextSize = width * 0.012;
+
+        console.log(nValues)
+
+        // Before
+        svg.append('text')
+            .attr('x', curveMargin.x * 0.05)
+            .attr('y', height - curveMargin.y * 0.25)
+            .attr('text-anchor', 'start')
+            .attr('font-family', 'Arial, sans-serif')
+            .attr('font-size', `${tinyTextSize}px`)
+            .attr('fill', '#333')
+            .text(`Group 1 n=${nValues.g1before}`);
+
+        svg.append('text')
+            .attr('x', curveMargin.x * 0.05)
+            .attr('y', height - curveMargin.y * 0.1)
+            .attr('text-anchor', 'start')
+            .attr('font-family', 'Arial, sans-serif')
+            .attr('font-size', `${tinyTextSize}px`)
+            .attr('fill', '#333')
+            .text(`Group 2 n=${nValues.g2before}`);
+        
+        // After
+        svg.append('text')
+            .attr('x', width - curveMargin.x * 0.4)
+            .attr('y', height - curveMargin.y * 0.25)
+            .attr('text-anchor', 'start')
+            .attr('font-family', 'Arial, sans-serif')
+            .attr('font-size', `${tinyTextSize}px`)
+            .attr('fill', '#333')
+            .text(`Group 1 n=${nValues.g1after}`);
+
+        svg.append('text')
+            .attr('x', width - curveMargin.x * 0.4)
+            .attr('y', height - curveMargin.y * 0.1)
+            .attr('text-anchor', 'start')
+            .attr('font-family', 'Arial, sans-serif')
+            .attr('font-size', `${tinyTextSize}px`)
+            .attr('fill', '#333')
+            .text(`Group 2 n=${nValues.g2after}`);
+    }
 
     svg.append('text')
         .attr('x', curveMargin.x * 0.9)
@@ -601,13 +661,13 @@ function loadCircles() {
             
 
             d3.select('#g1DepressedCount')
-                .text(`${displayedNumber(counts.g1Depressed)} \t(${((counts.g1Depressed / (g1Total != 0 ? g1Total : 1)) * 100).toFixed(1)}%)`);
+                .text(`${displayedNumber(counts.g1Depressed)} \t(${((counts.g1Depressed / (g1Total != 0 ? g1Total : 1)) * 100).toFixed()}%)`);
             d3.select('#g1NotDepressedCount')
-                .text(`${displayedNumber(counts.g1NotDepressed)} (${((counts.g1NotDepressed / (g1Total != 0 ? g1Total : 1)) * 100).toFixed(1)}%)`);
+                .text(`${displayedNumber(counts.g1NotDepressed)} (${((counts.g1NotDepressed / (g1Total != 0 ? g1Total : 1)) * 100).toFixed()}%)`);
             d3.select('#g2DepressedCount')
-                .text(`${displayedNumber(counts.g2Depressed)} (${((counts.g2Depressed / (g2Total != 0 ? g2Total : 1)) * 100).toFixed(1)}%)`);
+                .text(`${displayedNumber(counts.g2Depressed)} (${((counts.g2Depressed / (g2Total != 0 ? g2Total : 1)) * 100).toFixed()}%)`);
             d3.select('#g2NotDepressedCount')
-                .text(`${displayedNumber(counts.g2NotDepressed)} (${((counts.g2NotDepressed / (g2Total != 0 ? g2Total : 1)) * 100).toFixed(1)}%)`);
+                .text(`${displayedNumber(counts.g2NotDepressed)} (${((counts.g2NotDepressed / (g2Total != 0 ? g2Total : 1)) * 100).toFixed()}%)`);
 
             //This is for the bar graphs that grow upward
              const maxBarHeight = 100;
@@ -653,7 +713,7 @@ function loadCircles() {
                 .attr('height', g2NDHeight);
 
 
-
+/*
             const g1BeforePop = totalPop.g1before;
             d3.select('#Lg1DepressedCount')
                 .text(`${displayedNumber(depressionRates.g1before * g1BeforePop)} (${(depressionRates.g1before * 100).toFixed(1)}%)`);
@@ -689,7 +749,7 @@ function loadCircles() {
             d3.select('#Lg2ND')
                 .attr('y', g2NDBaseY - g2NDStaticHeight)
                 .attr('height', g2NDStaticHeight);
-           
+ */          
         }
 
         function animate() {
@@ -711,9 +771,61 @@ function loadCircles() {
 
         animate();
     }
+    
+    function showStaticChart(){
+        const maxBarHeight = 100;
+
+        const g1BeforePop = totalPop.g1before;
+        const g2BeforePop = totalPop.g2before;
+
+        const g1DBaseY = curveMargin.y + 5;
+        const g1NDBaseY = curveMargin.y + 270;
+        const g2DBaseY = curveMargin.y + 5;
+        const g2NDBaseY = curveMargin.y + 270;
+
+        // G1 before
+        const g1DStaticHeight = depressionRates.g1before * maxBarHeight;
+        const g1NDStaticHeight = (1 - depressionRates.g1before) * maxBarHeight;
+
+        // G2 before
+        const g2DStaticHeight = depressionRates.g2before * maxBarHeight;
+        const g2NDStaticHeight = (1 - depressionRates.g2before) * maxBarHeight;
+
+        // Update text labels for Group 1
+        d3.select('#Lg1DepressedCount')
+            .text(`${displayedNumber(Math.round(depressionRates.g1before * 100) / 100 * g1BeforePop)} (${(depressionRates.g1before * 100).toFixed(0)}%)`);
+
+        d3.select('#Lg1NotDepressedCount')
+            .text(`${displayedNumber((1 - Math.round(depressionRates.g1before * 100) / 100) * g1BeforePop)} (${((1 - depressionRates.g1before) * 100).toFixed(0)}%)`);
+
+   
+        d3.select('#Lg2DepressedCount')
+            .text(`${displayedNumber(Math.round(depressionRates.g2before * 100) / 100 * g2BeforePop)} (${(depressionRates.g2before * 100).toFixed(0)}%)`);
+
+        d3.select('#Lg2NotDepressedCount')
+            .text(`${displayedNumber((1 - Math.round(depressionRates.g2before * 100) / 100) * g2BeforePop)} (${((1 - depressionRates.g2before) * 100).toFixed(0)}%)`);
+
+        // bars height 
+        d3.select('#Lg1D')
+            .attr('y', g1DBaseY)
+            .attr('height', g1DStaticHeight);
+
+        d3.select('#Lg1ND')
+            .attr('y', g1NDBaseY - g1NDStaticHeight)
+            .attr('height', g1NDStaticHeight);
+
+        d3.select('#Lg2D')
+            .attr('y', g2DBaseY)
+            .attr('height', g2DStaticHeight);
+
+        d3.select('#Lg2ND')
+            .attr('y', g2NDBaseY - g2NDStaticHeight)
+            .attr('height', g2NDStaticHeight);
+    }
 
     console.log(groupCircleNums)
     addLabels();
+    showStaticChart();
 
 }
 
@@ -724,12 +836,26 @@ const dropdownValue = (x) => d3.select(`#${x}Var`).node().value;
 const presets = [
         {
             type: "normal",
-            text: `Depression rates among the ${colorText("young", "#CB5680")} (18-25) and ${colorText("general population", "#86C1C4")} before and during COVID`,
+            text: `Depression rates among the ${colorText("young", "#7DC0A7")} (18-25) and ${colorText("general population", "#1D448F")} before and during COVID`,
             fields: {
                 startYearVar: 2019,
                 endYearVar: 2021,
                 g1AgeVar: "18-25",
+                g1Color: "#7DC0A7",
+                g2Color: "#1D448F",
+            },
+        },
+        {
+            type: "normal",
+            text: `Depression rates among ${colorText("women", "#CB5680")} in poor health and ${colorText("men", "#86C1C4")} in poor health before and during COVID`,
+            fields: {
+                startYearVar: 2019,
+                endYearVar: 2021,
+                g1SexVar: "Female",
+                g1HealthVar: "Poor",
                 g1Color: "#CB5680",
+                g2SexVar: "Male",
+                g2HealthVar: "Poor",
                 g2Color: "#86C1C4",
             },
         },
@@ -742,19 +868,40 @@ const presets = [
 let preset = presets[0]
 
 function updatePreset() {
+    d3.select('#g1DepressedCount').text("0 (0%)")
+    d3.select('#g1NotDepressedCount').text("0 (0%)")
+    d3.select('#g2DepressedCount').text("0 (0%)")
+    d3.select('#g2NotDepressedCount').text("0 (0%)")
+    
+    d3.select('#Lg1DepressedCount').text("0 (0%)")
+    d3.select('#Lg1NotDepressedCount').text("0 (0%)")
+    d3.select('#Lg2DepressedCount').text("0 (0%)")
+    d3.select('#Lg2NotDepressedCount').text("0 (0%)")
+
     document.getElementById("presetText").innerHTML = preset.text
+
+    const anyVars = ['g1Age', 'g1Sex', 'g1Ethnicity', 'g1Health', 'g1Income', 'g1Insured', 'g1Served', 'g2Age', 'g2Sex', 'g2Ethnicity', 'g2Health', 'g2Income', 'g2Insured', 'g2Served'];
+        
+    for (const v of anyVars) {
+        d3.select(`#${v}Var`).node().value = "Any"
+    }
 
     // Exit if custom
     if (preset.type == "custom") {
 
         document.getElementById("controls").style.display = ""
+
+        d3.select("#startYearVar").node().value = 2020
+        d3.select("#endYearVar").node().value = 2024
+        d3.select("#g1Color").node().value = "#61AC7B"
+        d3.select("#g2Color").node().value = "#F09E45"
+
         return
     }
 
     document.getElementById("controls").style.display = "none"
 
     for (const key in preset.fields) {
-        console.log(key, d3.select(`#${key}`).node().value, preset.fields[key])
         d3.select(`#${key}`).node().value = preset.fields[key]
     }
 }
@@ -788,6 +935,22 @@ function changePreset(c) {
         svg.selectAll('circle').remove();
         svg.selectAll('path').remove();
         svg.selectAll('rect').remove();
+        svg.selectAll('text').remove();
+
+        const bigTextSize = width * 0.03;
+
+        svg.append('text')
+            .attr('x', width / 2)
+            .attr('y', height / 2)
+            .attr('text-anchor', 'middle')
+            .attr('font-family', 'Arial, sans-serif')
+            .attr('font-size', `${bigTextSize}px`)
+            .attr('fill', '#333')
+            .attr('stroke', 'white')
+            .attr('stroke-width', '1')
+            .text('Create your own groups below!');
+
+
     } else {
         updateVis()
     }
