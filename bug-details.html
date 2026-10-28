@@ -1,17 +1,15 @@
 <!DOCTYPE html>
-<html lang="zxx">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <title>Aleko Samblanet</title>
 
-    <!--Meta For No Index-->
-    <meta name="robots" content="noindex, Nofollow, Noimageindex">
 
     <!-- mobile responsive meta -->
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="viewport"
-      content="width=device-width, initial-scale=1, maximum-scale=1"
+      content="width=device-width, initial-scale=1"
     />
 
     <!-- Slick Carousel -->
@@ -75,7 +73,7 @@
                 </li>
             </ul>
             <div class="navbar-nav">
-                <a href="contact.html" class="hire_button">Hire Me Now</a>
+                <a href="contact.html" class="hire_button">Get in touch</a>
             </div>
         </div>
     </div>
@@ -100,28 +98,28 @@
 			</g>
 		</svg>
 	</div>
-	<div class="animate-pattern">
-		<img src="images/service/background-pattern.svg" alt="background-shape">
-	</div>
     <div class="container">
         <div class="row">
             <div class="col-lg-10 offset-lg-1 text-center">
                 <div class="case-details-title">
                     <h1>Bug Souls - Game Demo</h1>
                 </div>
-                <p>Developed in Unity in conjunction with Aldrin Duran, Tibor Mester, 
-                    Jacob Liu, and Shafeen Zaber, we used GitHub for version control, 
-                    learning to manage merges, resolve conflicts, and coordinate development. 
-                    We also explored motion capture technology to create realistic animations, 
-                    refining combat and movement. While the game remains incomplete, it delivers 
-                    a polished vertical slice with engaging mechanics, a structured level design, 
-                    and a tutorial that effectively introduces its core systems.</p>
-                <p>Bug Souls is an action RPG that blends high-skill, movement-based combat with
-                     immersive role-playing, set in a bug-scale world. The game introduces a unique 
-                     traversal system with surface walking, where "up" is relative, and a versatile
-                     grappling mechanic for dynamic movement and combat interactions. Combat is 
-                     physics-driven, rewarding momentum-based attacks, and AI behaviors are managed 
-                     through a modular system using coroutines and scriptable objects.</p>
+                <p>Bug Souls is an action RPG vertical slice built in Unity by a team of five for 
+                    a game programming class: Aldrin Duran, Tibor Mester, Jacob Liu, Shafeen Zaber, 
+                    and me. We used GitHub for version control, learning to manage merges, resolve 
+                    conflicts, and coordinate development, and we explored motion capture for 
+                    realistic animations. The game is incomplete, but the slice includes the core 
+                    combat and movement mechanics, a structured level, and a tutorial that introduces 
+                    the main systems.</p>
+                <p>The game is set in a bug-scale world and features surface walking, where “up” is 
+                    relative, a grappling mechanic, and physics-driven combat that rewards momentum. 
+                    AI behaviors run on a modular system built from coroutines and scriptable objects.</p>
+                <p>I built much of the enemy and combat side of the game: the enemy AI (a chase behavior, 
+                    the beetle enemy, and a swarm spawner), the final boss fight (two-way damage, hit 
+                    colliders, and smooth attack transitions), and the melee animation pipeline. I performed 
+                    in the motion-capture suit to record character animations, retargeted them to a humanoid 
+                    rig, modeled the Needle sword, and added wind-particle effects to the beetle-shaped sword 
+                    the player wields.</p>
                 <div class="case-details-info">
                     <div class="case-details-info-item">
                         <h5>Motivation</h5>
@@ -140,23 +138,15 @@
                     <div class="col-lg-6">
                         <div class="case-details-service">
                             <h3>Challenge</h3>
-                            <p>One of the key challenges faced in the development of Bug Souls was creating a smooth 
-                                and immersive surface walking mechanic. Unlike traditional wall-running systems, this 
-                                mechanic required players to navigate a world where there is no universal sense of "up." 
-                                Implementing this required a deep understanding of geometry and quaternions to ensure that 
-                                player movement and camera control felt natural and intuitive.
-                            </p>
-                        </div>
+                            <p>Early on, attack animations were triggered separately for each weapon, so 
+                                adding a new weapon meant rewriting animation calls and made combat hard to extend.</div>
                     </div>
                     <div class="col-lg-6">
                         <div class="case-details-service">
                             <h3>Solution</h3>
-                            <p>To overcome this, we developed a custom physics implementation that dynamically adjusted
-                                an object’s normal and velocity based on terrain curvature. By fine-tuning the camera controller 
-                                to follow the player smoothly, we achieved a seamless movement system that reinforced the 
-                                game’s sense of freedom.
-                            </p>
-                        </div>
+                            <p>I converted the animations into named clips and refactored how attacks are triggered 
+                                so a weapon only has to specify its clip. That made new weapons, like the two-handed 
+                                Needle sword, straightforward to add.</div>
                     </div>
                 </div>
                 <div class="case-details-button" style="padding-bottom: 5em;">
@@ -165,10 +155,10 @@
                     </ul>
                 </div>
                 <div class="case-details-thumb">
-                    <img src="images/portfolio/bug-souls/startScreen.png" alt="startScreen">
-                    <img src="images/portfolio/bug-souls/spiderSword.png" alt="spiderSword">
-                    <img src="images/portfolio/bug-souls/spiderKingAttack.png" alt="spiderKingAttack">
-                    <img src="images/portfolio/bug-souls/bossFight.png" alt="bossFight">
+                    <img src="images/portfolio/bug-souls/startScreen.png" alt="Bug Souls Title Screen">
+                    <img src="images/portfolio/bug-souls/spiderSword.png" alt="Spider NPC Talking">
+                    <img src="images/portfolio/bug-souls/spiderKingAttack.png" alt="Spider King Fight">
+                    <img src="images/portfolio/bug-souls/bossFight.png" alt="Boss fight">
                 </div>
 
                 <h3>Game Demos Playlist:</h3>
@@ -177,7 +167,7 @@
                     <div class="thumb">
                         <img src="images/portfolio/bug-souls/startScreen.png" alt="popup">
                     </div>
-                    <a href="https://www.youtube.com/embed/videoseries?si=NfQgFO-crS28i5X-&amp;list=PLbWAF5WzEOByf6CRsyLXt8gmtkBNs4kcy" type="button" class="popup-button">
+                    <a href="https://www.youtube.com/embed/videoseries?si=NfQgFO-crS28i5X-&amp;list=PLbWAF5WzEOByf6CRsyLXt8gmtkBNs4kcy" type="button" class="popup-button" aria-label="Play video">
                         <svg xmlns="http://www.w3.org/2000/svg" width="21" height="24" viewBox="0 0 21 24">
                             <path fill="#5d78ff" d="M17.961 10.264a2 2 0 010 3.473L2.992 22.29A2 2 0 010 20.554V3.446A2 2 0 012.992 1.71z" data-name="Polygon 4"/>
                         </svg>
@@ -206,7 +196,7 @@
                     <div class="next">
                         <div class="content">
                             <span>Next project</span>
-                            <h5 class="title"><a href="fire-details.html">Fire Escape</a></h5>
+                            <h5 class="title"><a href="ski-details.html">Ski Frenzy</a></h5>
                         </div>
                         <div class="icon">
                             <svg xmlns="http://www.w3.org/2000/svg" width="15.556" height="28.285" viewBox="0 0 15.556 28.285">
@@ -232,6 +222,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
+                
                 <div class="contact__cta">
                     <div class="shape-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="357" height="315.029" viewBox="0 0 357 315.029">
@@ -251,6 +242,7 @@
                         <a href="contact.html">Get in touch</a>
                     </div>
                 </div>
+                
             </div>
         </div>
         <div class="row contact__widget">
@@ -264,8 +256,9 @@
                     <h3>Links</h3>
                     <ul>
                         <li><a class="scroll" href="index.html#about">About me</a></li>
-                        <li><a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/aleko-samblanet">LinkedIn</a></li>
+                        <li><a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/saleko">LinkedIn</a></li>
                         <li><a target="_blank" rel="noopener noreferrer" href="https://github.com/sAleko">GitHub</a></li>
+                        <li><a href="https://drive.google.com/uc?export=download&id=1X_jTTGC9yYBlRAbUZ-a8HyKMQU2uvlS1">Download Resume</a></li>
                     </ul>
                 </div>
             </div>
@@ -273,9 +266,9 @@
                 <div class="contact__widget_address">
                     <h3>Contact</h3>
                     <ul>
-                        <li><a href="tel:443 835 0415"><i class="fa fa-phone"></i>(443) 835 0415</a></li> 
-                        <li><a href="mailto:aleko.samblanet.2021@gmail.com"><i class="fa fa-envelope"></i>aleko.samblanet.2021@gmail.com</a></li>
-                        <li><p><i class="fa fa-map-marker"></i>Millersville, MD 21108</p></li>
+                        <li><a href="tel:+14438350415"><i class="fa fa-phone"></i>(443) 835-0415</a></li> 
+                        <li><a href="mailto:alekosamblanet@gmail.com"><i class="fa fa-envelope"></i>alekosamblanet@gmail.com</a></li>
+                        <li><p><i class="fa fa-map-marker"></i>Millersville, MD</p></li>
                     </ul>
                 </div>
             </div>

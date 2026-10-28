@@ -1,17 +1,15 @@
 <!DOCTYPE html>
-<html lang="zxx">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <title>Aleko Samblanet</title>
 
-    <!--Meta For No Index-->
-    <meta name="robots" content="noindex, Nofollow, Noimageindex">
 
     <!-- mobile responsive meta -->
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="viewport"
-      content="width=device-width, initial-scale=1, maximum-scale=1"
+      content="width=device-width, initial-scale=1"
     />
 
     <!-- Slick Carousel -->
@@ -75,7 +73,7 @@
                 </li>
             </ul>
             <div class="navbar-nav">
-                <a href="contact.html" class="hire_button">Hire Me Now</a>
+                <a href="contact.html" class="hire_button">Get in touch</a>
             </div>
         </div>
     </div>
@@ -100,9 +98,6 @@
 			</g>
 		</svg>
 	</div>
-	<div class="animate-pattern">
-		<img src="images/service/background-pattern.svg" alt="background-shape">
-	</div>
     <div class="container">
         <div class="row">
             <div class="col-lg-10 offset-lg-1 text-center">
@@ -110,27 +105,23 @@
                     <h1>Ski Frenzy - Android Game Demo</h1>
                 </div>
                 <p>
-                    Ski Frenzy is an Android game developed by a team of four, including myself, 
-                    for an Android app development class using Kotlin, XML, and Firebase through Android 
-                    Studio and GitHub. This skiing game features four interactive screens that 
-                    immerse players in a fast-paced, obstacle-dodging experience. The title screen welcomes
-                    players with options to "Play," access "Options," or view the "Leaderboard," complete
-                    with a banner ad at the bottom, ready for monetization if published. The game's core challenge lies 
-                    in navigating a skier down a slope, avoiding rocks, with intuitive controls and 
-                    dynamic difficulty settings, making it an exciting project that showcases our 
-                    team's collaborative efforts.
+                    Ski Frenzy is an Android game built by a team of four for an Android app development class, 
+                    using Kotlin, XML, and Firebase in Android Studio, with GitHub for version control. Players 
+                    steer a skier down a slope and dodge rocks across four screens: title, options, gameplay, 
+                    and leaderboard. The title screen has a banner ad at the bottom, ready for monetization if 
+                    the game were published.
                 </p>
                 <p>
-                    The app's development was both rewarding and challenging, particularly in implementing the 
-                    live leaderboard feature. The leaderboard screen displays ranked player names alongside 
-                    their high scores, with the user's name highlighted in light blue for easy identification. 
-                    Integrating Firebase to manage real-time leaderboard updates was the most complex task. 
-                    We tackled this by connecting to Firebase's live database, ensuring a player's score is 
-                    only updated if their current high score surpasses their previous one on the leaderboard. 
-                    This solution required careful synchronization and testing to ensure seamless performance. 
-                    Ski Frenzy combines smooth gameplay, user-friendly options like adjustable difficulty and 
-                    display name customization, and robust Firebase integration, reflecting our team's 
-                    dedication to creating a fun and functional mobile game.
+                    The hardest part was the live leaderboard. It shows ranked player names and high scores, 
+                    with the current player highlighted in light blue, and it updates in real time through 
+                    Firebase. A player’s score is only saved if it beats their previous best, which took careful 
+                    synchronization and testing. The game also has adjustable difficulty and customizable display 
+                    names.
+                </p>
+                <p>
+                    I implemented tilt steering, collisions and scoring, the main menu with the banner ad, the 
+                    options and high-score handling, and the Firebase-backed leaderboard, including the logic that 
+                    only saves a player’s best score.
                 </p>
                 <div class="case-details-info">
                     <div class="case-details-info-item">
@@ -163,7 +154,7 @@
                     <div class="thumb">
                         <img src="images/portfolio/ski/homeSmall.png" alt="popup">
                     </div>
-                    <a href="https://www.youtube.com/embed/ifoLxcbu5bg?si=3u6LvVpXAE-CAzkr" type="button" class="popup-button">
+                    <a href="https://www.youtube.com/embed/ifoLxcbu5bg?si=3u6LvVpXAE-CAzkr" type="button" class="popup-button" aria-label="Play video">
                         <svg xmlns="http://www.w3.org/2000/svg" width="21" height="24" viewBox="0 0 21 24">
                             <path fill="#5d78ff" d="M17.961 10.264a2 2 0 010 3.473L2.992 22.29A2 2 0 010 20.554V3.446A2 2 0 012.992 1.71z" data-name="Polygon 4"/>
                         </svg>
@@ -187,13 +178,13 @@
                         </div>
                         <div class="content">
                             <span>Prev project</span>
-                            <h5 class="title"><a href="solo-details.html">Solo Flying</a></h5>
+                            <h5 class="title"><a href="bug-details.html">Bug Souls</a></h5>
                         </div>
                     </div>
                     <div class="next">
                         <div class="content">
                             <span>Next project</span>
-                            <h5 class="title"><a href="aftershock-details.html">Invisible Aftershocks</a></h5>
+                            <h5 class="title"><a href="fire-details.html">Fire Escape</a></h5>
                         </div>
                         <div class="icon">
                             <svg xmlns="http://www.w3.org/2000/svg" width="15.556" height="28.285" viewBox="0 0 15.556 28.285">
@@ -219,6 +210,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
+                
                 <div class="contact__cta">
                     <div class="shape-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="357" height="315.029" viewBox="0 0 357 315.029">
@@ -238,6 +230,7 @@
                         <a href="contact.html">Get in touch</a>
                     </div>
                 </div>
+                
             </div>
         </div>
         <div class="row contact__widget">
@@ -251,8 +244,9 @@
                     <h3>Links</h3>
                     <ul>
                         <li><a class="scroll" href="index.html#about">About me</a></li>
-                        <li><a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/aleko-samblanet">LinkedIn</a></li>
+                        <li><a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/saleko">LinkedIn</a></li>
                         <li><a target="_blank" rel="noopener noreferrer" href="https://github.com/sAleko">GitHub</a></li>
+                        <li><a href="https://drive.google.com/uc?export=download&id=1X_jTTGC9yYBlRAbUZ-a8HyKMQU2uvlS1">Download Resume</a></li>
                     </ul>
                 </div>
             </div>
@@ -260,9 +254,9 @@
                 <div class="contact__widget_address">
                     <h3>Contact</h3>
                     <ul>
-                        <li><a href="tel:443 835 0415"><i class="fa fa-phone"></i>(443) 835 0415</a></li> 
-                        <li><a href="mailto:aleko.samblanet.2021@gmail.com"><i class="fa fa-envelope"></i>aleko.samblanet.2021@gmail.com</a></li>
-                        <li><p><i class="fa fa-map-marker"></i>Millersville, MD 21108</p></li>
+                        <li><a href="tel:+14438350415"><i class="fa fa-phone"></i>(443) 835-0415</a></li> 
+                        <li><a href="mailto:alekosamblanet@gmail.com"><i class="fa fa-envelope"></i>alekosamblanet@gmail.com</a></li>
+                        <li><p><i class="fa fa-map-marker"></i>Millersville, MD</p></li>
                     </ul>
                 </div>
             </div>
